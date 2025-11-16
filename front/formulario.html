@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Formulario Evento</title>
+  <!-- Bootstrap (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+
+<body>
+<h1 class="text-center mt-5">Formulario de Registro</h1>
+
+<!-- Área para mensajes de resultado -->
+<div id="mensajeResultado" class="container my-3"></div>
+
+<main class="container my-5">  
+<form id="formularioEvento" method="post" enctype="multipart/form-data">      <fieldset class="border p-4 rounded">
+        <legend class="float-none w-auto px-2">Información personal</legend>
+
+        <div class="mb-3">
+          <label for="nombre" class="form-label">Nombre completo</label>
+          <input type="text" class="form-control" id="nombre" name="nombre" required />
+          <div class="invalid-feedback">Por favor, introduce tu nombre completo.</div>
+
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Correo electrónico</label>
+          <input type="email" class="form-control" id="email" name="email" required />
+          <div class="invalid-feedback">Introduce un correo electrónico válido.</div>
+
+        </div>
+
+        <div class="mb-3">
+          <label for="telefono" class="form-label">Teléfono</label>
+          <input type="tel" pattern="^[0-9]{9}$" class="form-control" id="telefono" name="telefono" />
+          <div class="invalid-feedback">Introduce un teléfono válido.</div>
+        </div>
+
+        <!-- Fecha de nacimiento -->
+        <div class="mb-3">
+          <label for="fecha_nac" class="form-label">Fecha de nacimiento</label>
+          <input type="date" class="form-control" id="fecha_nac" name="fecha_nac" required>
+          <div class="invalid-feedback">Introduce tu fecha de nacimiento. No puede ser futura.</div>
+
+        </div>
+
+        <!-- Género -->
+        <div class="mb-3">
+          <label class="form-label d-block">Género</label>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="genero" id="genero_m" value="Masculino" required>
+            <label class="form-check-label" for="genero_m">Masculino</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="genero" id="genero_f" value="Femenino" required>
+            <label class="form-check-label" for="genero_f">Femenino</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="genero" id="genero_o" value="Otro" required>
+            <label class="form-check-label" for="genero_o">Otro</label>
+          </div>
+
+          <div class="invalid-feedback d-block" id="generoFeedback">Selecciona una opción.</div>
+        </div>
+      </fieldset>
+
+      <fieldset class="border p-4 rounded mt-4">
+        <legend class="float-none w-auto px-2">Información del evento</legend>
+        <!-- Fecha del evento -->
+        <div class="mb-3">
+          <label for="fecha_evento" class="form-label">Fecha del evento: </label>
+          <input type="date" class="form-control" id="fecha_evento" name="fecha_evento" required>
+        </div>
+
+        <!-- Tipo de entrada -->
+        <div class="mb-3">
+          <label for="tipo_entrada" class="form-label">Tipo de entrada: </label>
+          <select class="form-select" id="tipo_entrada" name="tipo_entrada" required>
+            <option value="" selected disabled>Selecciona un tipo...</option>
+            <option value="General">General</option>
+            <option value="VIP">VIP</option>
+            <option value="Estudiante">Estudiante</option>
+          </select>
+        </div>
+        <!-- Preferencias de comida -->
+        <div class="mb-3">
+          <label class="form-label d-block">Preferencias de comida: </label>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="comida[]" id="comida_veg" value="Vegetariano">
+            <label class="form-check-label" for="comida_veg">Vegetariano</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="comida[]" id="comida_vegan" value="Vegano">
+            <label class="form-check-label" for="comida_vegan">Vegano</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="comida[]" id="comida_singlu" value="Sin gluten">
+            <label class="form-check-label" for="comida_singlu">Sin gluten</label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" name="comida[]" id="comida_none" value="Sin preferencias">
+            <label class="form-check-label" for="comida_none">Sin preferencias</label>
+          </div>
+
+          <div class="form-text">Puedes marcar varias opciones o dejarlo vacío.</div>
+        </div>
+      </fieldset>
+
+      <fieldset class="border p-4 rounded mt-4">
+        <legend class="float-none w-auto px-2">Información de acceso</legend>
+
+        <!-- Nombre de usuario -->
+        <div class="mb-3">
+          <label for="username" class="form-label">Nombre de usuario</label>
+          <input type="text" class="form-control" id="username" name="username" required minlength="3" maxlength="30"
+            placeholder="Ej: usuario23">
+          <div class="invalid-feedback">Debe tener entre 3 y 30 caracteres.</div>
+        </div>
+
+        <!-- Contraseña -->
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <input type="password" class="form-control" id="password" name="password" required minlength="6"
+            placeholder="Mínimo 6 caracteres">
+          <div class="invalid-feedback">Debe tener al menos 6 caracteres.</div>
+        </div>
+
+        <!-- Confirmación de contraseña -->
+        <div class="mb-3">
+          <label for="password_confirm" class="form-label">Confirmar contraseña</label>
+          <input type="password" class="form-control" id="password_confirm" name="password_confirm" required>
+          <div class="invalid-feedback">Las contraseñas deben coincidir.</div>
+        </div>
+      </fieldset>
+      <fieldset class="border p-4 rounded mt-4">
+        <legend class="float-none w-auto px-2">Preferencias de contacto</legend>
+
+        <!-- Checkbox: recibir correos -->
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="checkbox" id="recibir_email" name="recibir_email" value="si">
+          <label class="form-check-label" for="recibir_email">
+            Deseo recibir notificaciones por correo electrónico
+          </label>
+        </div>
+
+        <!-- Checkbox: aceptar términos (obligatorio) -->
+        <div class="form-check mb-2">
+          <input class="form-check-input" type="checkbox" id="acepta_tc" name="acepta_tc" required>
+          <label class="form-check-label" for="acepta_tc">
+            Acepto los términos y condiciones
+          </label>
+          <div class="invalid-feedback d-block">Debes aceptar los términos para continuar.</div>
+        </div>
+      </fieldset>
+
+      <fieldset class="border p-4 rounded mt-4">
+        <legend class="float-none w-auto px-2">Encuesta adicional y archivo adjunto</legend>
+
+        <!-- Valoración con control deslizante -->
+        <div class="mb-3">
+          <label for="valoracion" class="form-label">
+            Califica eventos anteriores (1 = malo, 10 = excelente):
+            <span id="valorValoracion"></span>
+          </label>
+          <input type="range" class="form-range" id="valoracion" name="valoracion" min="1" max="10" value="5">
+        </div>
+
+        <!-- Comentarios adicionales -->
+        <div class="mb-3">
+          <label for="comentarios" class="form-label">Comentarios adicionales</label>
+          <textarea class="form-control" id="comentarios" name="comentarios" rows="4" maxlength="500"
+            placeholder="Escribe aquí tus observaciones, sugerencias o comentarios..."></textarea>
+          <div class="form-text">Máximo 500 caracteres.</div>
+        </div>
+
+        <!-- Subida de archivo -->
+        <div class="mb-3">
+          <label for="archivo" class="form-label">Adjuntar archivo (opcional)</label>
+          <input class="form-control" type="file" id="archivo" name="archivo" accept=".pdf,.jpg,.jpeg,.png,.doc,.docx">
+          <div class="form-text">Formatos permitidos: PDF, JPG, PNG, DOC, DOCX. Tamaño máximo: 2 MB.</div>
+        </div>
+      </fieldset>
+
+      <!-- Botón final que envía el formulario con submit -->
+      <div class="d-grid mt-4">
+        <button type="submit" class="btn btn-primary btn-lg">Enviar registro</button>
+      </div>
+    </form>
+  </main>
+
+  <!-- Script de Bootstrap (para validaciones y componentes interactivos) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="validacion.js"></script>
+
+</body>
+
+</html>
